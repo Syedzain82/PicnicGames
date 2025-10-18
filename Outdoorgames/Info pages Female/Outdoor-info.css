@@ -1,0 +1,30 @@
+:root {
+  
+  --bg-color2:#fff3b0;
+
+
+  --nav-color:#003566;
+  --nav-color2:#a4133c;
+ }
+ 
+ body{
+  background-color: var(--bg-color2) !important;
+  color: var(--color) !important;
+ }
+ .navbar{
+  background-color: var(--nav-color) !important;
+ }
+ .infocard{
+     background-color: #676969 !important;
+  
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ }
+ .btton{
+  background-color: #f7b801;
+  color: black;
+} 
+.btton:hover{
+  background-color: black;
+  color: white;
+} 

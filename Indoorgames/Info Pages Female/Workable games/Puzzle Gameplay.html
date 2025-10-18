@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>4x4 Sliding Puzzle Game</title>
+   <!-- Bootsrap Link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- External Css file -->
+  <link rel="stylesheet" href="../../..//Style.css">
+  <!-- jquery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Google Fonts  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <!-- Animation on scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Font Awesome CDn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body{
+      background-color: #fff3b0;
+    }
+    .puzzle-container {
+      max-width: 440px;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+    .tile {
+      background-color: #003566;
+      color: #fff3b0 ;
+      font-weight: bold;
+      font-size: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+    .tile.empty {
+      background-color: goldenrod;
+      cursor: default;
+    }
+    .tile.correct {
+      background-color: #28a745 !important;
+    }
+    #shuffleBtn{
+      background-color: #003566;
+      color: aliceblue;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container py-3">
+      <a class="navbar-brand fw-bolder" href="../../../Index.html">
+        <img class="logo" src="../../../Images/Logo.png" alt="">
+      </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white active" href="../../../Index.html">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item text-black" href="../../../Indoorgames/Indoorgames.html">Indoor Games</a></li>
+              <li><a class="dropdown-item text-black" href="../../../Outdoorgames/outdoorgames.html">Outdoor Games</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../../../Other Pages/AboutUs.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../../../Other Pages/ContactUs.html">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../../../Other Pages/Itinerary.html">Itinerary</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container text-center my-5">
+    <h2 class="mt-4 ">Sliding Puzzle Game</h2>
+    <div class="puzzle-container" id="puzzle"></div>
+    <button id="shuffleBtn" class="btn mt-3">Shuffle Puzzle</button>
+    <div id="message" class="mt-3"></div>
+  </div>
+
+   <!-- Footer  -->
+
+  <footer class=" text-white pt-5">
+  <section class="end text-center">
+    <h2 class="title3 fw-bold mb-4">
+      Subscribe to our <u class="news text-warning">Newsletters</u>
+    </h2>
+  </section>
+
+  <section class="end2 d-flex flex-wrap justify-content-center mb-5 gap-2">
+    <input type="email" class="form-control w-auto" placeholder="Enter your email">
+ <button class="btn btn-warning sbtn">Subscribe</button>
+  </section>
+
+  <section class="container footer text-start">
+    <div class="row text-center text-md-start gy-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <a href="../../../Index.html">
+          <img class="logo1 img-fluid mb-3" src="../../../Images/Logo.png" alt="Logo" style="max-width:150px;">
+        </a>
+        <p>Discover endless ways to play, connect, and create memories with games made for everyone.</p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="../../../Index.html" class="directlink  text-decoration-none">Home</a></li>
+          <li><a href="../../../Other Pages/AboutUs.html" class="directlink text-decoration-none">About Us</a></li>
+          <li><a href="../../../Other Pages/ContactUs.html" class="directlink text-decoration-none">Contact Us</a></li>
+          <li><a href="../../../Other Pages/Query.html" class="directlink text-decoration-none">Query</a></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Categories</h5>
+        <ul class="list-unstyled">
+          <li><a href="../../../Indoorgames/Indoorgames.html" class="directlink text-decoration-none">Indoor Games</a></li>
+          <li><a href="../../../Outdoorgames/outdoorgames.html" class="directlink  text-decoration-none">Outdoor Games</a></li>
+        </ul>
+      </div>
+
+      <div class="social col-12 col-md-6 col-lg-3">
+        <p class="fw-bold">Social Media</p>
+        <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
+          <a class="tags i" href="https://www.instagram.com/syed_zain84/"><i class="fa-brands fa-instagram"></i></a>
+          <a class="tags f" href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a class="tags l" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="tags y" href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-4">
+
+    <div class="copyrights text-center pb-3">
+      <p class="mb-0">
+        © 2025 Funfinity All Rights Reserved <br>
+        | A project developed by dedicated students to promote fun, creativity, and togetherness through games |
+      </p>
+    </div>
+  </section>
+</footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function() {
+      const size = 4; // 4x4 grid
+      let tiles = [];
+      let emptyIndex = size * size - 1; // last tile is empty
+
+      // Initialize tiles in order with last empty
+      function initTiles() {
+        tiles = [];
+        for(let i=1; i < size*size; i++) {
+          tiles.push(i);
+        }
+        tiles.push(null); // empty tile
+        emptyIndex = tiles.length - 1;
+      }
+
+      // Render the tiles to the board
+      function render() {
+        const board = $('#puzzle');
+        board.empty();
+        tiles.forEach((num, idx) => {
+          const tile = $('<div></div>').addClass('tile');
+          if (num === null) {
+            tile.addClass('empty').text('');
+          } else {
+            tile.text(num);
+          }
+          tile.attr('data-index', idx);
+          board.append(tile);
+        });
+      }
+
+      // Swap tiles at indices a and b
+      function swap(a, b) {
+        [tiles[a], tiles[b]] = [tiles[b], tiles[a]];
+      }
+
+      // Check if puzzle is solved
+      function isSolved() {
+        for(let i=0; i < tiles.length - 1; i++) {
+          if (tiles[i] !== i + 1) return false;
+        }
+        return true;
+      }
+
+      // Get row and col from index
+      function getPos(index) {
+        return { row: Math.floor(index / size), col: index % size };
+      }
+
+      // Check if clicked tile is adjacent to empty tile
+      function canMove(index) {
+        const emptyPos = getPos(emptyIndex);
+        const tilePos = getPos(index);
+        const rowDiff = Math.abs(emptyPos.row - tilePos.row);
+        const colDiff = Math.abs(emptyPos.col - tilePos.col);
+        return (rowDiff + colDiff) === 1;
+      }
+
+      // Move tile if possible
+      function moveTile(index) {
+        if(canMove(index)) {
+          swap(index, emptyIndex);
+          emptyIndex = index;
+          render();
+          if(isSolved()) {
+            $('#message').text('🎉 Congratulations! Puzzle solved.');
+            $('.tile').addClass('correct');
+          } else {
+            $('#message').text('');
+            $('.tile').removeClass('correct');
+          }
+        }
+      }
+
+      // Shuffle the puzzle with valid moves
+      function shufflePuzzle() {
+        let moves = 1000;
+        while(moves > 0) {
+          let neighbors = [];
+          const emptyPos = getPos(emptyIndex);
+          if (emptyPos.row > 0) neighbors.push(emptyIndex - size);
+          if (emptyPos.row < size -1) neighbors.push(emptyIndex + size);
+          if (emptyPos.col > 0) neighbors.push(emptyIndex -1);
+          if (emptyPos.col < size -1) neighbors.push(emptyIndex +1);
+
+          const rand = neighbors[Math.floor(Math.random() * neighbors.length)];
+          swap(emptyIndex, rand);
+          emptyIndex = rand;
+          moves--;
+        }
+        $('#message').text('');
+        $('.tile').removeClass('correct');
+        render();
+      }
+
+      // Initialization
+      initTiles();
+      render();
+
+      // Tile click event
+      $('#puzzle').on('click', '.tile', function() {
+        const index = parseInt($(this).attr('data-index'));
+        moveTile(index);
+      });
+
+      // Shuffle button
+      $('#shuffleBtn').click(function() {
+        shufflePuzzle();
+      });
+    });
+  </script>
+   <!-- Bootsrap Javascript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+</html>

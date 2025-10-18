@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Charades One-Turn Game</title>
+  <!-- Bootsrap Link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <!-- External Css file -->
+  <link rel="stylesheet" href="../Code/Style.css">
+  <!-- jquery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Google Fonts  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <!-- Animation on scroll -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Font Awesome CDn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="../../../Style.css">
+  <style>
+    body {
+      background: #fff3b0;
+    
+      text-align: center;
+    }
+
+    #game-box {
+      background-color:#003566 ;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    #game-box{
+        color: white;
+    }
+
+    #word-display {
+      font-size: 2rem;
+      margin-top: 20px;
+      color: #f7b801;
+      display: none;
+    }
+
+    #timer {
+      font-size: 1.5rem;
+      margin-top: 15px;
+      color: #ce1717;
+    }
+
+    .option-btn {
+      margin: 10px;
+      background-color: #f7b801;
+      color: black;
+      border: none;
+    }
+    .option-btn:hover{
+       color: #f7b801;
+       background-color: black;
+       
+    }
+
+    #options-box {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #message {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      display: none;
+    }
+
+    #restart-btn {
+      display: none;
+      margin-top: 25px;
+    }
+    #start-btn{
+        background: #f7b801;
+    }
+    #restart-btn{
+        background-color: #f7b801;
+    }
+    #reveal-btn{
+        background-color: #f7b801;
+        
+    }
+     #reveal-btn:hover{
+        color: #ffffff;
+        
+     }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container py-3">
+      <a class="navbar-brand fw-bolder" href="../../../Index.html">
+        <img class="logo" src="../../../Images/Logo.png" alt="">
+      </a>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white active" href="../../../Index.html">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item text-black" href="../../../Indoorgames/Indoorgames.html">Indoor Games</a></li>
+              <li><a class="dropdown-item text-black" href="../../../Outdoorgames/outdoorgames.html">Outdoor Games</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../../../Other Pages/AboutUs.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../../../Other Pages/ContactUs.html">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../../../Other Pages/Itinerary.html">Itinerary</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+ <div>
+   <div id="game-box" class="container my-5">
+    <h2>🎭 Charades (One Turn)</h2>
+    <p>Act out the word, then guess it!</p>
+
+    <button id="start-btn" class="btn btn-success btn-lg">Start Game</button>
+    <button
+      id="reveal-btn"
+      class="btn btn-lg mt-3"
+      style="display: none"
+    >
+      Reveal Word
+    </button>
+
+    <div id="word-display"></div>
+    <div id="timer"></div>
+
+    <div id="options-box" class="mt-4"></div>
+
+    <div id="message"></div>
+
+    <button id="restart-btn" class="btn">🔁 Restart Game</button>
+  </div>
+
+ </div>
+
+  <!-- Footer  -->
+
+  <footer class=" text-white pt-5">
+  <section class="end text-center">
+    <h2 class="title3 fw-bold mb-4">
+      Subscribe to our <u class="news text-warning">Newsletters</u>
+    </h2>
+  </section>
+
+  <section class="end2 d-flex flex-wrap justify-content-center mb-5 gap-2">
+    <input type="email" class="form-control w-auto" placeholder="Enter your email">
+ <button class="btn btn-warning sbtn">Subscribe</button>
+  </section>
+
+  <section class="container footer text-start">
+    <div class="row text-center text-md-start gy-4">
+      <div class="col-12 col-md-6 col-lg-3">
+        <a href="../../../Index.html">
+          <img class="logo1 img-fluid mb-3" src="../../../Images/Logo.png" alt="Logo" style="max-width:150px;">
+        </a>
+        <p>Discover endless ways to play, connect, and create memories with games made for everyone.</p>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="../../../Index.html" class="directlink  text-decoration-none">Home</a></li>
+          <li><a href="../../../Other Pages/AboutUs.html" class="directlink text-decoration-none">About Us</a></li>
+          <li><a href="../../../Other Pages/ContactUs.html" class="directlink text-decoration-none">Contact Us</a></li>
+          <li><a href="../../../Other Pages/Query.html" class="directlink text-decoration-none">Query</a></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-3">
+        <h5>Categories</h5>
+        <ul class="list-unstyled">
+          <li><a href="../../../Indoorgames/Indoorgames.html" class="directlink text-decoration-none">Indoor Games</a></li>
+          <li><a href="../../../Outdoorgames/outdoorgames.html" class="directlink  text-decoration-none">Outdoor Games</a></li>
+        </ul>
+      </div>
+
+      <div class="social col-12 col-md-6 col-lg-3">
+        <p class="fw-bold">Social Media</p>
+        <div class="d-flex justify-content-center justify-content-md-start gap-3 fs-4">
+          <a class="tags i" href="https://www.instagram.com/syed_zain84/"><i class="fa-brands fa-instagram"></i></a>
+          <a class="tags f" href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a class="tags l" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="tags y" href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-4">
+
+    <div class="copyrights text-center pb-3">
+      <p class="mb-0">
+        © 2025 Funfinity All Rights Reserved <br>
+        | A project developed by dedicated students to promote fun, creativity, and togetherness through games |
+      </p>
+    </div>
+  </section>
+</footer>
+  <script>
+    const words = [
+      "Spider-Man",
+      "Dancing",
+      "Making Tea",
+      "Elephant",
+      "Flying a kite",
+      "Doctor",
+      "Superman",
+      "Cooking",
+      "Lion",
+      "Playing Guitar",
+      "Swimming",
+      "Crying Baby",
+      "Singing",
+      "Police Officer",
+      "Robot"
+    ];
+
+    let correctWord = "";
+    let countdown;
+    let timeLeft = 5;
+
+    function startTimer() {
+      timeLeft = 3;
+      $('#timer').text(`⏱ Time left: ${timeLeft}s`);
+      countdown = setInterval(() => {
+        timeLeft--;
+        $('#timer').text(`⏱ Time left: ${timeLeft}s`);
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          $('#timer').text("⏰ Time's up!");
+          showOptions();
+        }
+      }, 1000);
+    }
+
+    function showOptions() {
+      $('#reveal-btn').hide();
+      $('#word-display').hide();
+      $('#options-box').empty().show();
+      $('#message').hide();
+      $('#restart-btn').hide();
+
+      const options = new Set();
+      options.add(correctWord);
+
+      // Get 3 random wrong options
+      while (options.size < 4) {
+        const rand = words[Math.floor(Math.random() * words.length)];
+        if (rand !== correctWord) options.add(rand);
+      }
+
+      // Shuffle options
+      const optionArray = Array.from(options).sort(() => 0.5 - Math.random());
+
+      optionArray.forEach((word) => {
+        const btn = $('<button>')
+          .addClass('btn btn-outline-primary option-btn')
+          .text(word)
+          .on('click', function () {
+            $('.option-btn').prop('disabled', true);
+            $('#restart-btn').show();
+
+            if (word === correctWord) {
+              $('#message')
+                .text("🎉 Congratulations! You guessed it right.")
+                .css('color', 'green')
+                .show();
+            } else {
+              $('#message')
+                .text("❌ You guessed it wrong.")
+                .css('color', 'red')
+                .show();
+              $(this).addClass('btn-danger').removeClass('btn-outline-primary');
+            }
+          });
+
+        $('#options-box').append(btn);
+      });
+    }
+
+    $('#start-btn').on('click', function () {
+      correctWord = words[Math.floor(Math.random() * words.length)];
+      $('#word-display').text(correctWord).hide();
+      $('#reveal-btn').show();
+      $('#start-btn').hide();
+      $('#timer').text('');
+      $('#message').hide();
+      $('#options-box').hide();
+      $('#restart-btn').hide();
+    });
+
+    $('#reveal-btn').on('click', function () {
+      $('#word-display').fadeIn();
+      startTimer();
+      $('#reveal-btn').hide();
+    });
+
+    $('#restart-btn').on('click', function () {
+      // Just reload the page to restart game
+      location.reload();
+    });
+  </script>
+  
+  <!-- Bootsrap Javascript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+</html>
